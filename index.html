@@ -1,51 +1,262 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="cn">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit" />
+<meta name="Author" content="JIAJIA">
+<title>JIAJIA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="JIAJIA">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a9430a37066911650e26adadcc42798a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+//禁用操作
 
-	<meta name="theme-color" content="#6aaa64" />
-	<link rel="manifest" href="manifest.json">
-	<link rel="shortcut icon" href="img/logo_32x32.png" type="image/x-icon">
-	<link rel="apple-touch-icon" href="img/logo_192x192.png" />
-	<link rel="stylesheet" href="global.css">
+window.onload = function(){
+    document.onkeydown = function (){
+        var e = window.event || arguments[0];
+        //F12
+        if(e.keyCode == 123){
+            return false;
+        //Ctrl+Shift+I
+        }else if((e.ctrlKey) && (e.shiftKey) && (e.keyCode == 73)){
+            return false;
+        //Ctrl+Shift+C
+        }else if((e.ctrlKey) && (e.shiftKey) && (e.keyCode == 67)){
+            return false;
+        //Shift+F10
+        }else if((e.shiftKey) && (e.keyCode == 121)){
+            return false;
+        //Ctrl+U
+        }else if((e.ctrlKey) && (e.keyCode == 85)){
+            return false;
+        //Ctrl+S
+        }else if((e.ctrlKey) && (e.keyCode == 83)){
+        return false;
+    }
+};
+    document.oncontextmenu = function (){
+        return false;
+    }
+}
 
-	<meta name="author" content="MikhaD">
-	<meta name="description"
-		content="Wordle with infinite, hourly and daily modes. Double tap on a word to learn it's definition.">
-	<meta name="keywords"
-		content="wordle, infinite wordle, wordle infinite, infinate wordle, infinte wordle, unlimited, daily wordle, wordle+, word game, puzzle, game">
 
-	<!-- FB Meta Tags -->
-	<meta property="og:url" content="https://mikhad.github.io/wordle/">
-	<meta property="og:type" content="website">
-	<meta property="og:title" content="Wordle+ | An infinite word guessing game">
-	<meta property="og:description" content="Guess the word in 6 tries. Play daily, hourly and infinite modes.">
-	<meta property="og:image" content="https://mikhad.github.io/wordle/img/og_1200x630.png">
+//操作提示
 
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<meta name="google-site-verification" content="nfr4xQiyHWYkamHQq6M7E9kXoXp8tmNihRU0c5yXjlw" />
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-RHN319RJ6V"></script>
-	<script>
-		if (document.location.origin === "https://mikhad.github.io") {
-			// Google Analytics
-			window.dataLayer = window.dataLayer || [];
-			function gtag() { dataLayer.push(arguments); }
-			gtag('js', new Date());
-			gtag('config', 'G-RHN319RJ6V');
+((function() {
+    var callbacks = [],
+    timeLimit = 50,
+    open = false;
+    setInterval(loop, 1);
+    return {
+        addListener: function(fn) {
+            callbacks.push(fn);
+        },
+        cancleListenr: function(fn) {
+            callbacks = callbacks.filter(function(v) {
+                return v !== fn;
+            });
+        }
+    }
+    function loop() {
+        var startTime = new Date();
+        debugger;
+        if (new Date() - startTime > timeLimit) {
+            if (!open) {
+                callbacks.forEach(function(fn) {
+                    fn.call(null);
+                });
+            }
+            open = true;
+            window.stop();
+            alert('不要扒我了');
+            window.location.reload();
+            window.location.href='./firewall.php';
 
-			// PWA Service worker
-			if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js");
-		}
-	</script>
+            
+        } else {
+            open = false;
+        }
+    }
+})()).addListener(function() {
+    window.location.reload();
+});
 
-	<script type="module" src="/src/main.ts"></script>
-	<!-- changed to something more suited to being the title of a tab in App.svelte. This title is for SEO -->
-	<title>Infinite wordle - Play unlimited wordles | Wordle+</title>
+//检测控制台是否开启
+var h = window.innerHeight,w=window.innerWidth;
+window.onresize = function () {
+if (h!= window.innerHeight||w!=window.innerWidth){
+    window.close();
+    window.location = "about:blank";}
+}
+</script>
 </head>
-
 <body>
+<nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+<div class="container-fluid">
+<div class="navbar-header">
+<a class="navbar-brand" href="index.html#"><strong>SB</strong></a>
+</div>
+<div id="navbar" class="navbar-collapse collapse">
+<ul class="nav navbar-nav navbar-right">
+</ul>
+</div>
+</div>
+</nav>
+<div class="modal fade" id="helpDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header" align="center">
+</div>
+<div class="modal-body">
+</div>
+<div class="modal-footer" align="center">
+<div class="col-md-11">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="container bs-docs-container">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+<h3><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> games</h3>
+<ul>
+<li><a href="https://haiyong.site/moyu/mgdmx/">萌怪大冒险</a></li>
+<li><a href="https://haiyong.site/moyu/bwjqr/">保卫机器人</a></li>	
+<li><a href="https://haiyong.site/moyu/tuzikuaipao/">兔子快跑</a></li>
+<li><a href="https://haiyong.site/moyu/SpaceHuggers/">第三人称射击游戏</a></li>
+<li><a href="https://haiyong.site/moyu/hundouluo/">魂斗罗</a></li>
+<li><a href="https://haiyong.site/moyu/zhsl/">召唤神龙</a></li>
+<li><a href="https://haiyong.site/moyu/tingche/">公园停车</a></li>
+<li><a href="https://haiyong.site/moyu/msts/">密室逃生</a></li>
+<li><a href="https://haiyong.site/moyu/weixiandehuoche/">危险货车</a></li>
+<li><a href="https://haiyong.site/moyu/wzzc/">亡者之城</a></li>	
+<li><a href="https://haiyong.site/moyu/hjkg/">全新版黄金矿工</a></li>
+<li><a href="https://haiyong.site/moyu/tegong/">特工卡尔施</a></li>
+<li><a href="https://haiyong.site/moyu/magicegg/">动物大作战物理射击类html5游戏</a></li>
+<li><a href="https://haiyong.site/moyu/feiyue/">html5横版飞行《飞跃驼峰航线》</a></li>
+<li><a href="https://haiyong.site/moyu/guangtouqiang/">疯狂光头强</a></li>
+<li><a href="https://haiyong.site/moyu/taikong/">Three.js炫彩太空跑酷VR小游戏</a></li>
+<li><a href="https://haiyong.site/moyu/flddsy/">html5物理游戏《佛莱迪的试验》</a></li>
+<li><a href="https://haiyong.site/moyu/qishi/">横版街机风格骑士冒险游戏</a></li>
+<li><a href="https://haiyong.site/moyu/100/">是男人就下100层</a></li>
+<li><a href="https://haiyong.site/moyu/mdtw/">死亡墓地大逃亡HTML5游戏</a></li>
+<li><a href="https://haiyong.site/moyu/senlin/">html5休闲游戏《森林协奏曲》</a></li>
+<li><a href="https://haiyong.site/moyu/xiangqi/">中国象棋</a></li>
+<li><a href="https://haiyong.site/moyu/paoku/">横板城堡小兵跑酷</a></li>
+<li><a href="https://haiyong.site/moyu/hlxz/">红蓝旋转（风格类似纪念碑谷）</a></li>
+<li><a href="https://haiyong.site/moyu/xbw">小霸王游戏机</a></li>
+<li><a href="https://wanghao221.github.io/shuiguorenzhe/">水果忍者</a></li>
+<li><a href="https://wanghao221.github.io/buyudaren/">捕鱼达人</a></li>
+<li><a href="https://haiyong.site/moyu/tiaofangzi.html">跳房子</a></li>
+<li><a href="https://haiyong.site/moyu/SpaceHuggers/">第三人称射击游戏</a></li>
+<li><a href="https://haiyong.site/moyu/shitoujiandaobu">石头剪刀布</a></li>
+<li><a href="https://haiyong.site/moyu/guomalu.html">过马路小游戏</a></li>
+<li><a href="https://haiyong.site/moyu/shengchengshu.html">自定义生成树</a></li>
+<li><a href="https://haiyong.site/moyu/2048.html">2048</a></li>
+<li><a href="https://haiyong.site/moyu/wuziqi.html">五子棋</a></li>
+<li><a href="https://haiyong.site/moyu/zhipaijiyi.html">纸牌记忆游戏</a></li>
+<li><a href="https://haiyong.site/moyu/doumao.html">逗猫</a></li>
+<li><a href="https://haiyong.site/moyu/baohujidan.html">保护鸡蛋</a></li>
+<li><a href="https://haiyong.site/moyu/penhuolong.html">打喷嚏的喷火龙</a></li>
+<li><a href="https://haiyong.site/moyu/pokemon.html">宠物精灵对战</a></li>
+<li><a href="https://haiyong.site/moyu/qiefangkuai.html">切方块小游戏</a></li>
+<li><a href="https://haiyong.site/moyu/rengongzhizh.html">人工智障</a></li>
+<li><a href="https://haiyong.site/moyu/baohuduixin.html">保护芯堆</a></li>
+<li><a href="https://haiyong.site/moyu/eluosi.html">俄罗斯方块</a></li>
+<li><a href="https://haiyong.site/moyu/huaxue.html">户外滑雪</a></li>
+<li><a href="https://haiyong.site/moyu/tan.html">视觉差贪吃蛇</a></li>
+<li><a href="https://haiyong.site/moyu/cesu.html">CPS测速</a></li>
+<li><a href="https://haiyong.site/moyu/santa-claus.html">圣诞老人过桥</a></li>
+<li><a href="https://haiyong.site/moyu/sanzhiji.html">三只小鸡</a></li>
+<li><a href="https://haiyong.site/moyu/tamagotchi/">Tamagotchi养成小游戏</a></li>
+<li><a href="https://haiyong.site/moyu/mofang">3D酷炫拼魔方</a></li>
+<li><a href="https://haiyong.site/moyu/tower-blocks.html">盖塔楼</a></li>
+<li><a href="https://haiyong.site/moyu/xiaofeiyu.html">小飞鱼🐳</a></li>
+<li><a href="https://haiyong.site/moyu/saolei.html">扫雷</a></li>
+<li><a href="https://haiyong.site/moyu/wu.html">双人五子棋</a></li>
+<li><a href="https://haiyong.site/moyu/zhizhuzhipai.html">蜘蛛纸牌</a></li>
+<li><a href="https://haiyong.site/moyu/shejian.html">射箭游戏</a></li>
+<li><a href="https://haiyong.site/moyu/dadishu.html">打地鼠</a></li>
+<li><a href="https://haiyong.site/moyu/laganziguoguan">拉杆子过关</a></li>
+<li><a href="https://haiyong.site/moyu/doudizhu.html">斗地主</a></li>
+<li><a href="https://haiyong.site/moyu/danzhu.html">弹珠打砖块</a></li>
+<li><a href="https://haiyong.site/moyu/feiji.html">飞机躲避障碍物</a></li>
+<li><a href="https://haiyong.site/moyu/feijizhadan.html">飞机炸弹💣</a></li>
+<li><a href="https://haiyong.site/moyu/lion.html">爱吹风的小狮子🦁</a></li>
+<li><a href="https://haiyong.site/moyu/xiaoxiongchixingxing.html">小熊吃星星 61关</a></li>
+<li><a href="https://haiyong.site/moyu/chazhen.html">见缝插针</a></li>
+<li><a href="https://haiyong.site/moyu/xxoo.html">AI井字棋</a></li>
+<li><a href="https://haiyong.site/moyu/xxoo2.html">双人井字棋bug版</a></li>
+<li><a href="https://haiyong.site/moyu/xxoo3.html">双人井字棋升级版</a></li>
+<li><a href="https://haiyong.site/moyu/xxoo3.html">闯关小游戏</a></li>
+<li><a href="https://haiyong.site/moyu/wuxianpaoku.html">无限跑酷</a></li>
+<li><a href="https://haiyong.site/moyu/paocaimigong.html">虫子走迷宫🐛</a></li>
+<li><a href="https://haiyong.site/moyu/siyifu">撕衣服👗</a></li>
+<li><a href="https://haiyong.site/moyu/migong.html">鼠标🖱走迷宫</a></li>
+<li><a href="https://haiyong.site/moyu/quwei.html">趣味闯关</a></li>
+<li><a href="https://haiyong.site/moyu/dou.html">吃豆人游戏</a></li>
+<li><a href="https://haiyong.site/moyu/danban.html">挡板小游戏</a></li>
+<li><a href="https://haiyong.site/moyu/yingxiong.html">是英雄就下一百层</a></li>
+<li><a href="https://haiyong.site/moyu/kill-the-king.html">杀死国王</a></li>
+<li><a href="https://haiyong.site/moyu/touzi/">骰子</a></li>
+</ul>
+</ul>
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+<h3><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Tools</h3>
+<ul>
+	<li><a href="https://haiyong.site/tools/chengyujielong.html">成语接龙</a></li>	
+	<li><a href="https://haiyong.site/tools/daojishi">倒数计时器</a></li>	
+	<li><a href="https://haiyong.site/tools/openurls">批量网址打开工具</a></li>
+	<li><a href="https://haiyong.site/tools/qianming">签名生成器</a></li>
+	<li><a href="https://haiyong.site/tools/yinyue">音乐播放器</a></li>
+	<li><a href="https://haiyong.site/tools/age-calculator.html">年龄计算器</a></li>
+	<li><a href="https://haiyong.site/tools/color-generator.html">随机颜色生成器</a></li>
+	<li><a href="https://haiyong.site/tools/daimasumiao.html">代码素描</a></li>	
+	<li><a href="https://haiyong.site/tools/daxiaoxie.html">大小写转换</a></li>	
+	<li><a href="https://haiyong.site/tools/dice.html">自定义骰子</a></li>
+	<li><a href="https://haiyong.site/tools/form.html">可视化表单设计器</a></li>
+	<li><a href="https://haiyong.site/tools/goupibutong.html">狗屁不通文章生成器</a></li>
+	<li><a href="https://haiyong.site/tools/image-zoom.html">图片放大器</a></li>	
+	<li><a href="https://haiyong.site/tools/jsq.html">计算器</a></li>	
+	<li><a href="https://haiyong.site/tools/jsq2.html">计算器2.0</a></li>
+	<li><a href="https://haiyong.site/tools/jsq3.html">简单计算器3.0</a></li>
+	<li><a href="https://haiyong.site/tools/mima.html">密码生成器</a></li>
+	<li><a href="https://haiyong.site/tools/pdf.html">图片-PDF 转换器</a></li>
+	<li><a href="https://haiyong.site/tools/picture-of-code.html">代码美化截图</a></li>
+	<li><a href="https://haiyong.site/tools/qr_code.html">二维码生成器</a></li>
+	<li><a href="https://haiyong.site/tools/random-password-generator.html">自定义密码生成器</a></li>
+	<li><a href="https://haiyong.site/tools/shenfenzheng.html">身份证号码生成器</a></li>
+	<li><a href="https://haiyong.site/tools/simple-javascript-analog-clock.html">简单的javascript模拟时钟</a></li>
+	<li><a href="https://haiyong.site/tools/spin-the-wheel.html">自定义大转盘</a></li>
+	<li><a href="https://haiyong.site/tools/todolist.html">代办事项清单</a></li>
+	<li><a href="https://haiyong.site/tools/weather.html">天气实况</a></li>	
+	<li><a href="https://haiyong.site/tools/wenben.html">将文本内容保存到文件</a></li>
+	<li><a href="https://haiyong.site/tools/yan.html">颜色生成器</a></li>	
+	<li><a href="https://haiyong.site/tools/yane.html">配色器</a></li>
+	<li><a href="https://haiyong.site/tools/zifu.html">实时字符计数器</a></li>	
+	<li><a href="https://haiyong.site/demo/yinghua.html">樱花</a></li>
+	<li><a href="https://haiyong.site/demo/xiaxue">下雪</a></li>
+	<li><a href="https://haiyong.site/demo/qicaiyu.html">七彩雨</a></li>
+	<li><a href="https://haiyong.site/demo/chuanyueshikong.html">时光机</a></li>
+	<li><a href="https://haiyong.site/demo/daynight.html">日夜切换</a></li>
+	<li><a href="https://haiyong.site/demo/clock3.html">八卦时钟</a></li>
+	<li><a href="https://haiyong.site/demo/clock1.html">白色简约时钟</a></li>
+	<li><a href="https://haiyong.site/demo/clock2.html">黑色酷炫时钟</a></li>
+	<li><a href="https://haiyong.site/demo/eluvletter">表白神器</a></li>
+	<li><a href="https://haiyong.site/demo/kaiguan.html">开关</a></li>
+	<li><a href="https://haiyong.site/demo/wave.html">水波文本动画</a></li>
+</ul>
+</div>	
+</div>
 </body>
-
 </html>
+
