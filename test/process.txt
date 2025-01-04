@@ -1,1 +1,1 @@
-[HipsTray.exe,zhudongfangyu.exe]
+[HipsTray.exe,HipsDaemon.exe,HipsMain.exe,zhudongfangyu.exe,360tray.exe,360rp.exe,360safe.exe,RavMonD.exe,kxetray.exe,QQPCTray.exe,KSafeTray.exe]
