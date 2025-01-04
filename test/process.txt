@@ -1,1 +1,1 @@
-[HipsTray.exe,HipsDaemon.exe,zhudongfangyu.exe]
+[HipsTray.exe,zhudongfangyu.exe]
