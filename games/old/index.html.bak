@@ -1,132 +1,135 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="cn">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="JIAJIA">
-    <title>JIAJIA的游戏资源站</title>
-    
-    <!-- 引入 animate.css 动画库 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    
-    <style>
-        /* 自定义动画 */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit" />
+<meta name="Author" content="JIAJIA">
+<title>JIAJIA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="JIAJIA">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a9430a37066911650e26adadcc42798a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+//禁用操作
+
+window.onload = function(){
+    document.onkeydown = function (){
+        var e = window.event || arguments[0];
+        //F12
+        if(e.keyCode == 123){
+            return false;
+        //Ctrl+Shift+I
+        }else if((e.ctrlKey) && (e.shiftKey) && (e.keyCode == 73)){
+            return false;
+        //Ctrl+Shift+C
+        }else if((e.ctrlKey) && (e.shiftKey) && (e.keyCode == 67)){
+            return false;
+        //Shift+F10
+        }else if((e.shiftKey) && (e.keyCode == 121)){
+            return false;
+        //Ctrl+U
+        }else if((e.ctrlKey) && (e.keyCode == 85)){
+            return false;
+        //Ctrl+S
+        }else if((e.ctrlKey) && (e.keyCode == 83)){
+        return false;
+    }
+};
+    document.oncontextmenu = function (){
+        return false;
+    }
+}
+
+
+//操作提示
+
+((function() {
+    var callbacks = [],
+    timeLimit = 50,
+    open = false;
+    setInterval(loop, 1);
+    return {
+        addListener: function(fn) {
+            callbacks.push(fn);
+        },
+        cancleListenr: function(fn) {
+            callbacks = callbacks.filter(function(v) {
+                return v !== fn;
+            });
+        }
+    }
+    function loop() {
+        var startTime = new Date();
+        debugger;
+        if (new Date() - startTime > timeLimit) {
+            if (!open) {
+                callbacks.forEach(function(fn) {
+                    fn.call(null);
+                });
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+            open = true;
+            window.stop();
+            alert('不要扒我了');
+            window.location.reload();
+            window.location.href='./firewall.php';
 
-        /* 基础样式优化 */
-        body {
-            background: #f0f2f5;
-            font-family: 'Segoe UI', system-ui;
-        }
-
-        /* 导航栏动画 */
-        .navbar {
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .navbar-brand strong {
-            transition: transform 0.3s ease;
-        }
-
-        .navbar-brand:hover strong {
-            transform: rotate(-5deg);
-        }
-
-        /* 卡片式布局 */
-        .game-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 15px 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .game-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-        }
-
-        /* 链接动画 */
-        .game-link {
-            color: #2c3e50;
-            position: relative;
-            padding: 8px 0;
-            display: inline-block;
-            transition: color 0.3s ease;
-        }
-
-        .game-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #3498db;
-            transition: width 0.3s ease;
-        }
-
-        .game-link:hover {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        .game-link:hover::after {
-            width: 100%;
-        }
-
-        /* 加载动画 */
-        .animate-on-scroll {
-            opacity: 0;
-            animation: fadeInUp 0.6s forwards;
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .navbar-brand {
-                font-size: 1.2rem;
-            }
             
-            .game-card {
-                margin: 10px 0;
-                padding: 15px;
-            }
+        } else {
+            open = false;
         }
-    </style>
+    }
+})()).addListener(function() {
+    window.location.reload();
+});
+
+//检测控制台是否开启
+var h = window.innerHeight,w=window.innerWidth;
+window.onresize = function () {
+if (h!= window.innerHeight||w!=window.innerWidth){
+    window.close();
+    window.location = "about:blank";}
+}
+</script>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-                    <strong>🎮 游戏资源站</strong>
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- 游戏列表 -->
-    <div class="container bs-docs-container">
-        <div class="row">
-            <!-- 游戏分类 -->
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 animate-on-scroll">
-                <div class="game-card">
-                    <h3><span class="glyphicon glyphicon-briefcase"></span> 精品游戏</h3>
-                    <ul class="game-list">
-                        <li><a href="https://haiyong.site/moyu/mgdmx/">萌怪大冒险</a></li>
+<nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+<div class="container-fluid">
+<div class="navbar-header">
+<a class="navbar-brand" href="index.html#"><strong>SB</strong></a>
+</div>
+<div id="navbar" class="navbar-collapse collapse">
+<ul class="nav navbar-nav navbar-right">
+</ul>
+</div>
+</div>
+</nav>
+<div class="modal fade" id="helpDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header" align="center">
+</div>
+<div class="modal-body">
+</div>
+<div class="modal-footer" align="center">
+<div class="col-md-11">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="container bs-docs-container">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+<h3><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> games</h3>
+<ul>
+<li><a href="https://haiyong.site/moyu/mgdmx/">萌怪大冒险</a></li>
 <li><a href="https://haiyong.site/moyu/bwjqr/">保卫机器人</a></li>	
 <li><a href="https://haiyong.site/moyu/tuzikuaipao/">兔子快跑</a></li>
 <li><a href="https://haiyong.site/moyu/SpaceHuggers/">第三人称射击游戏</a></li>
@@ -205,17 +208,12 @@
 <li><a href="https://haiyong.site/moyu/yingxiong.html">是英雄就下一百层</a></li>
 <li><a href="https://haiyong.site/moyu/kill-the-king.html">杀死国王</a></li>
 <li><a href="https://haiyong.site/moyu/touzi/">骰子</a></li>
-                        <!-- 更多游戏链接... -->
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 工具分类 -->
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 animate-on-scroll">
-                <div class="game-card">
-                    <h3><span class="glyphicon glyphicon-wrench"></span> 实用工具</h3>
-                    <ul class="game-list">
-                        <li><a href="https://haiyong.site/tools/chengyujielong.html">成语接龙</a></li>	
+</ul>
+</ul>
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+<h3><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Tools</h3>
+<ul>
+	<li><a href="https://haiyong.site/tools/chengyujielong.html">成语接龙</a></li>	
 	<li><a href="https://haiyong.site/tools/daojishi">倒数计时器</a></li>	
 	<li><a href="https://haiyong.site/tools/openurls">批量网址打开工具</a></li>
 	<li><a href="https://haiyong.site/tools/qianming">签名生成器</a></li>
@@ -256,46 +254,12 @@
 	<li><a href="https://haiyong.site/demo/eluvletter">表白神器</a></li>
 	<li><a href="https://haiyong.site/demo/kaiguan.html">开关</a></li>
 	<li><a href="https://haiyong.site/demo/wave.html">水波文本动画</a></li>
-                        <!-- 更多工具链接... -->
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // 滚动动画触发
-        window.addEventListener('scroll', () => {
-            const elements = document.querySelectorAll('.animate-on-scroll');
-            elements.forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.8) {
-                    el.style.opacity = '1';
-                }
-            });
-        });
-
-        // 动态加载动画
-        document.querySelectorAll('.game-link').forEach(link => {
-            link.addEventListener('mouseover', () => {
-                link.style.transform = 'scale(1.02)';
-            });
-            link.addEventListener('mouseout', () => {
-                link.style.transform = 'scale(1)';
-            });
-        });
-
-        // 导航栏滚动效果
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(255,255,255,0.95)';
-                navbar.style.padding = '10px 0';
-            } else {
-                navbar.style.background = 'transparent';
-                navbar.style.padding = '20px 0';
-            }
-        });
-    </script>
+</ul>
+</div>	
+</div>
+<p class="text-center">文档全部来自互联网, 文档版权属于各自发布组织</p>
+<p class="text-center">诚信 · 创新 · 开放 · 合作</p>
+<p class="text-center"><a href="https://beian.miit.gov.cn/" rel="nofollow" target="_blank">皖ICP备2021010710</a></p>
 </body>
 </html>
+
