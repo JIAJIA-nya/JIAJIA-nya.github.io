@@ -166,27 +166,3 @@
                 container.appendChild(star);
             }
         }
-
-        // 音乐播放控制
-        const audio = document.getElementById('bgm');
-        let isPlaying = false;
-
-        function togglePlay() {
-            isPlaying ? audio.pause() : audio.play();
-            isPlaying = !isPlaying;
-            document.querySelector('.fa-play').classList.toggle('fa-pause');
-        }
-
-        function setVolume(value) {
-            audio.volume = value;
-        }
-
-        // 初始化
-        window.onload = () => {
-            createStars();
-            // 自动播放音乐（注意：浏览器可能阻止自动播放）
-            audio.play().catch(() => console.log('需要用户交互后才能播放音乐'));
-        }
-    </script>
-</body>
-</html>
