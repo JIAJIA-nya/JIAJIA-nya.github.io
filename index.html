@@ -222,6 +222,9 @@
         <button class="portal-btn" onclick="window.location.href='https://chat-nextgen.vercel.app/'">
             <span>🤖</span> 入机聊天
         </button>
+        <button class="portal-btn" onclick="loadWhisper()">
+            <span>📝</span> 作者悄悄话
+        </button>
     </div>
 
     <div class="eternal-text">
@@ -248,22 +251,21 @@
             dialog.querySelector('.whisper-content').innerHTML = content;
             dialog.style.display = 'block';
             backdrop.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // 防止滚动
         }
 
-        // 关闭对话框并恢复背景
+        // 关闭悄悄话对话框并恢复背景
         document.querySelector('.close-btn').addEventListener('click', () => {
             const dialog = document.querySelector('.whisper-dialog');
             const backdrop = document.querySelector('.backdrop');
             dialog.style.display = 'none';
             backdrop.classList.add('fade-out-backdrop');
-            backdrop.addEventListener('animationend', () => {
-                backdrop.style.display = 'none';
-                backdrop.classList.remove('fade-out-backdrop');
-            });
+            document.body.style.overflow = 'auto'; // 恢复滚动
+            setTimeout(() => backdrop.style.display = 'none', 500); // 等待动画结束再隐藏
         });
 
         // 加载悄悄话
-        document.addEventListener('DOMContentLoaded', () => {
+        function loadWhisper() {
             const loader = document.querySelector('.loader');
             loader.style.display = 'block';
 
@@ -284,14 +286,7 @@
                 .finally(() => {
                     loader.style.display = 'none';
                 });
-        });
-
-        // 点击背景关闭对话框
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('backdrop')) {
-                document.querySelector('.close-btn').click();
-            }
-        });
+        }
     </script>
 </body>
 </html>
