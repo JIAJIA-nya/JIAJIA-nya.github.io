@@ -2,72 +2,124 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>主入口 | Game Galaxy</title>
-    <script src="https://fastly.jsdelivr.net/npm/live2d-widgets@0/autoload.js"></script>
-        <style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Galaxy | Eternal Beauty</title>
+    <style>
+        /* 字体 */
+        @font-face {
+            font-family: 'Beautiful';
+            src: url('fonts/Beautiful-ES-1.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #e6e6fa 0%, #d8bfd8 100%);
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --text-primary: rgba(80, 50, 90, 0.95);
+        }
+
         body {
-            background: #1a1a1a;
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            margin: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            position: relative;
             overflow: hidden;
         }
+
         .portal-container {
-            text-align: center;
             position: relative;
             z-index: 1;
+            backdrop-filter: blur(12px);
+            background: var(--glass-bg);
+            border-radius: 20px;
+            padding: 2rem 3rem;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
+
         .portal-btn {
-            background: linear-gradient(45deg, #ff0080, #7928ca);
-            border: none;
-            padding: 20px 40px;
-            margin: 20px;
-            border-radius: 30px;
-            color: white;
-            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 1.25rem 2rem;
+            margin: 1rem;
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s ease-out;
+            width: 260px;
+            backdrop-filter: blur(6px);
         }
-        .portal-btn::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: rotate(45deg);
-        }
+
         .portal-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
-        .portal-btn:hover::before {
-            animation: btnFlow 3s linear infinite;
+
+        .eternal-text {
+            position: fixed;
+            bottom: 3rem;
+            color: #6a457a;
+            font-family: 'Beautiful', cursive;
+            font-size: 2.5rem; /* 增大字号 */
+            text-align: center;
+            line-height: 1.3;
+            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+            max-width: 80%;
+            padding: 0 2rem;
+            animation: fadeIn 2.5s ease-out;
         }
-        @keyframes btnFlow {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .portal-container {
+                padding: 1.5rem;
+                width: 85%;
+            }
+            
+            .portal-btn {
+                width: 100%;
+                margin: 0.75rem 0;
+                font-size: 1rem;
+            }
+
+            .eternal-text {
+                font-size: 2rem; /* 移动端字号 */
+                bottom: 2rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="portal-container">
         <button class="portal-btn" onclick="window.location.href='Introduction.html'">
-            🏠 个人主页
+            <span>🏠</span> 个人主页
         </button>
-        <button class="portal-btn" onclick="window.location.href='games/old/'">
-            🎮 进入游戏
+        <button class="portal-btn" onclick="window.location.href='Games.html'">
+            <span>🎮</span> 进入游戏
         </button>
-        <button class="portal-btn" 
-                onclick="window.location.href='https://chat-nextgen.vercel.app/'">
-            🤖 AI聊天
+        <button class="portal-btn" onclick="window.location.href='https://chat-nextgen.vercel.app/'">
+            <span>🤖</span> 入机聊天
         </button>
+    </div>
+
+    <div class="eternal-text">
+        Will you still love me when I'm not young and beautiful?
     </div>
 </body>
 </html>
