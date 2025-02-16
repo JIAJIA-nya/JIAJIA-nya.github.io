@@ -223,7 +223,7 @@
             <span>🤖</span> 入机聊天
         </button>
         <button class="portal-btn" onclick="loadWhisper()">
-            <span>📝</span> 作者悄悄话
+            <span>📝</span> 今日悄悄话
         </button>
     </div>
 
@@ -244,6 +244,8 @@
     <div class="loader"></div>
 
     <script>
+        let shownWhispers = []; // 用来保存已显示的悄悄话内容
+
         // 显示悄悄话对话框并压暗背景
         function showWhisper(content) {
             const dialog = document.querySelector('.whisper-dialog');
@@ -274,8 +276,17 @@
                 .then(text => {
                     const lines = text.split(/\r?\n/).filter(line => line.trim());
                     if (lines.length === 0) throw new Error('空文件');
-                    
-                    const randomLine = lines[Math.floor(Math.random() * lines.length)];
+
+                    // 从未显示过的悄悄话中选择一个
+                    const unshownLines = lines.filter(line => !shownWhispers.includes(line));
+                    if (unshownLines.length === 0) {
+                        // 如果所有内容都已显示过，重置
+                        shownWhispers = [];
+                    }
+
+                    const randomLine = unshownLines[Math.floor(Math.random() * unshownLines.length)];
+                    shownWhispers.push(randomLine); // 将此悄悄话加入已显示列表
+
                     const rendered = marked.parse(randomLine);
                     showWhisper(rendered);
                 })
