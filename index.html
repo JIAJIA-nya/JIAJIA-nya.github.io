@@ -113,7 +113,7 @@
             }
         }
 
-        /* 新增悄悄话对话框样式 */
+        /* 悄悄话样式 */
         .whisper-dialog {
             position: fixed;
             top: 50%;
@@ -161,7 +161,7 @@
             color: #c895d3;
         }
 
-        /* 加载动画 */
+        /* Loading动画 */
         .loader {
             display: none;
             position: fixed;
@@ -182,7 +182,7 @@
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
-        /* 背景压暗效果 */
+        /* 背景鸭暗 */
         .backdrop {
             position: fixed;
             top: 0;
@@ -200,7 +200,7 @@
             100% { opacity: 1; }
         }
 
-        /* 背景恢复动画 */
+        /* 恢复动画(remove) */
         .fade-out-backdrop {
             animation: fadeOutBackdrop 0.5s forwards;
         }
@@ -234,37 +234,39 @@
     <!-- 背景压暗层 -->
     <div class="backdrop" id="backdrop"></div>
 
-    <!-- 悄悄话对话框 -->
+    <!-- 悄悄话框 -->
     <div class="whisper-dialog">
         <span class="close-btn">×</span>
         <div class="whisper-content"></div>
     </div>
 
-    <!-- 加载动画 -->
+    <!-- Loading动画 -->
     <div class="loader"></div>
 
     <script>
-        let shownWhispers = []; // 用来保存已显示的悄悄话内容
+        let shownWhispers = []; // 保存已显示的悄悄话
 
-        // 显示悄悄话对话框并压暗背景
-        function showWhisper(content) {
-            const dialog = document.querySelector('.whisper-dialog');
-            const backdrop = document.querySelector('.backdrop');
-            dialog.querySelector('.whisper-content').innerHTML = content;
-            dialog.style.display = 'block';
-            backdrop.style.display = 'block';
-            document.body.style.overflow = 'hidden'; // 防止滚动
-        }
+    function showWhisper(content) {
+        const dialog = document.querySelector('.whisper-dialog');
+        const backdrop = document.querySelector('.backdrop');
+        backdrop.classList.remove('fade-out-backdrop');
+        dialog.querySelector('.whisper-content').innerHTML = content;
+        dialog.style.display = 'block';
+        backdrop.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
 
-        // 关闭悄悄话对话框并恢复背景
-        document.querySelector('.close-btn').addEventListener('click', () => {
-            const dialog = document.querySelector('.whisper-dialog');
-            const backdrop = document.querySelector('.backdrop');
-            dialog.style.display = 'none';
-            backdrop.classList.add('fade-out-backdrop');
-            document.body.style.overflow = 'auto'; // 恢复滚动
-            setTimeout(() => backdrop.style.display = 'none', 500); // 等待动画结束再隐藏
-        });
+    document.querySelector('.close-btn').addEventListener('click', () => {
+        const dialog = document.querySelector('.whisper-dialog');
+        const backdrop = document.querySelector('.backdrop');
+        dialog.style.display = 'none';
+        backdrop.classList.add('fade-out-backdrop');
+        document.body.style.overflow = 'auto';
+        setTimeout(() => {
+            backdrop.style.display = 'none';
+            backdrop.classList.remove('fade-out-backdrop'); 
+        }, 500);
+    });
 
         // 加载悄悄话
         function loadWhisper() {
@@ -277,15 +279,13 @@
                     const lines = text.split(/\r?\n/).filter(line => line.trim());
                     if (lines.length === 0) throw new Error('空文件');
 
-                    // 从未显示过的悄悄话中选择一个
                     const unshownLines = lines.filter(line => !shownWhispers.includes(line));
                     if (unshownLines.length === 0) {
-                        // 如果所有内容都已显示过，重置
                         shownWhispers = [];
                     }
 
                     const randomLine = unshownLines[Math.floor(Math.random() * unshownLines.length)];
-                    shownWhispers.push(randomLine); // 将此悄悄话加入已显示列表
+                    shownWhispers.push(randomLine); 
 
                     const rendered = marked.parse(randomLine);
                     showWhisper(rendered);
